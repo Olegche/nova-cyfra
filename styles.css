@@ -1,4 +1,4 @@
-  :root{
+:root{
     color-scheme: only light;
     --bg:#F6F8FB;
     --ink:#12213E;
@@ -129,22 +129,23 @@
   .order-col .compare-label{color:var(--success);}
   .compare-arrow{align-self:center; text-align:center; font-size:1.4rem; color:var(--muted); margin-top:34px;}
 
-  .chip-field{position:relative; height:230px;}
   .chip{
     position:absolute; display:flex; align-items:center; gap:6px;
     background:var(--card); border:1px solid var(--line); border-radius:10px;
-    padding:7px 10px; font-size:.74rem; font-weight:500; white-space:nowrap;
+    padding:6px 10px; font-size:.72rem; font-weight:500; white-space:normal;
+    max-width:68%; line-height:1.25;
     color:var(--ink);
     box-shadow:0 6px 16px -10px rgba(18,33,62,.4);
   }
   .chip .dot{width:7px; height:7px; border-radius:50%; background:var(--danger); flex:none;}
-  /* scattered (chaos) positions, tuned to avoid overlap */
-  .chip:nth-child(1){top:0%;   left:0%;   transform:rotate(-8deg);}
-  .chip:nth-child(2){top:2%;   left:52%;  transform:rotate(6deg);}
-  .chip:nth-child(3){top:26%;  left:18%;  transform:rotate(9deg);}
+  /* scattered (chaos) positions, tuned to avoid overlap at any column width */
+  .chip-field{position:relative; height:260px;}
+  .chip:nth-child(1){top:0%;   left:0%;   transform:rotate(-7deg);}
+  .chip:nth-child(2){top:0%;   left:56%;  transform:rotate(6deg);}
+  .chip:nth-child(3){top:24%;  left:22%;  transform:rotate(8deg);}
   .chip:nth-child(4){top:48%;  left:0%;   transform:rotate(-5deg);}
-  .chip:nth-child(5){top:52%;  left:48%;  transform:rotate(-9deg);}
-  .chip:nth-child(6){top:78%;  left:14%;  transform:rotate(5deg);}
+  .chip:nth-child(5){top:48%;  left:56%;  transform:rotate(-8deg);}
+  .chip:nth-child(6){top:76%;  left:16%;  transform:rotate(5deg);}
 
   .order-list{display:flex; flex-direction:column; gap:9px;}
   .order-item{
