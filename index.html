@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uk" style="background:#F6F8FB;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>Нова цифра — наводимо лад у роботі з клієнтами</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body style="background:#F6F8FB;">
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo"><span class="logo-mark">Н</span>Нова цифра</a>
+    <nav>
+      <ul id="navList">
+        <li><a href="#services">Послуги</a></li>
+        <li><a href="#process">Як ми працюємо</a></li>
+        <li><a href="#about">Про нас</a></li>
+        <li><a href="#contact">Контакти</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Перемкнути тему" aria-pressed="false">
+        <span class="icon-light">☀️</span><span class="icon-dark">🌙</span>
+      </button>
+      <a href="#contact" class="btn btn-primary">Отримати аудит</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Цифровий розвиток малого бізнесу</p>
+        <h1>Допомагаємо власникам малого бізнесу перестати губити клієнтів через хаос</h1>
+        <p class="lead">Іноді достатньо CRM. Іноді потрібен ще й сайт, який реально приводить заявки, автоматизація рутини або AI-асистент. Ми підбираємо рішення під ситуацію, а не продаємо шаблон.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Отримати безкоштовний аудит</a>
+          <a href="#process" class="btn btn-ghost">Як ми працюємо</a>
+        </div>
+      </div>
+      <div class="chaos-panel" data-reveal>
+        <div class="compare">
+          <div class="chaos-col">
+            <p class="compare-label">Без системи</p>
+            <div class="chip-field">
+              <div class="chip"><span class="dot"></span>Заявка в Instagram</div>
+              <div class="chip"><span class="dot"></span>Пропущений дзвінок</div>
+              <div class="chip"><span class="dot"></span>Запис у блокноті</div>
+              <div class="chip"><span class="dot"></span>Повідомлення у Viber</div>
+              <div class="chip"><span class="dot"></span>Бронювання по телефону</div>
+              <div class="chip"><span class="dot"></span>"Не забути передзвонити"</div>
+            </div>
+          </div>
+          <div class="compare-arrow">→</div>
+          <div class="order-col">
+            <p class="compare-label">З Новою цифрою</p>
+            <div class="order-list" id="orderList">
+              <div class="order-item"><span class="check">✓</span>Усі заявки в одному місці</div>
+              <div class="order-item"><span class="check">✓</span>Дзвінки й повідомлення без втрат</div>
+              <div class="order-item"><span class="check">✓</span>Клієнти в системі, не в блокноті</div>
+              <div class="order-item"><span class="check">✓</span>Онлайн-бронювання замість дзвінків</div>
+              <div class="order-item"><span class="check">✓</span>Автоматичні нагадування</div>
+              <div class="order-item"><span class="check">✓</span>Видно, звідки прийшов клієнт</div>
+            </div>
+          </div>
+        </div>
+        <p class="caption">Так виглядає робота з клієнтами без системи — і так з нею.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="recognize">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Впізнай себе</p>
+        <h2>Дві типові ситуації малого бізнесу</h2>
+      </div>
+      <div class="scenarios">
+        <div class="scenario-card" data-reveal>
+          <p class="tag">Ситуація 01</p>
+          <h3>У вас тільки Instagram чи Facebook</h3>
+          <p>Сайту немає або він застарілий. Клієнти, які шукають вас у Google, а не в соцмережах, просто не знаходять.</p>
+          <ul>
+            <li>Робимо сайт, який приводить заявки з пошуку</li>
+            <li>Він же підсилює довіру — не лише сторінка в соцмережі, а власний майданчик</li>
+            <li>Базове SEO під локальні запити</li>
+          </ul>
+        </div>
+        <div class="scenario-card" data-reveal>
+          <p class="tag">Ситуація 02</p>
+          <h3>Сайт є, але бронювання — по телефону</h3>
+          <p>Заявки губляться між дзвінками, повідомленнями й записами на папері. Клієнт чекає — і йде до конкурента.</p>
+          <ul>
+            <li>Впроваджуємо CRM під ваші процеси</li>
+            <li>Одне місце для всіх заявок і клієнтів</li>
+            <li>Автоматичні нагадування замість "людського фактору"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Послуги</p>
+        <h2>Все, що потрібно для порядку в роботі з клієнтами</h2>
+      </div>
+      <div class="services">
+        <div class="service-card" data-reveal><div class="icon">01</div><h3>Веб-розробка</h3><p>Сайти, які приводять заявки, а не просто "існують".</p></div>
+        <div class="service-card" data-reveal><div class="icon">02</div><h3>SEO</h3><p>Локальна видимість там, де вас шукають реальні клієнти.</p></div>
+        <div class="service-card" data-reveal><div class="icon">03</div><h3>CRM</h3><p>Одна система замість блокнотів, Viber і пам'яті.</p></div>
+        <div class="service-card" data-reveal><div class="icon">04</div><h3>Автоматизація</h3><p>Нагадування, розподіл заявок, рутина — без ручної роботи.</p></div>
+        <div class="service-card" data-reveal><div class="icon">05</div><h3>AI-інтеграції</h3><p>Чат-боти й AI-асистенти для швидких відповідей клієнтам.</p></div>
+        <div class="service-card" data-reveal><div class="icon">06</div><h3>Аналітика</h3><p>Розуміння, звідки приходять клієнти і що працює насправді.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Як ми працюємо</p>
+        <h2>Чотири кроки від хаосу до системи</h2>
+      </div>
+      <div class="steps">
+        <div class="step" data-reveal><span class="num">01</span><h3>Аудит</h3><p>Дивимось, де саме губляться клієнти й час.</p></div>
+        <div class="step" data-reveal><span class="num">02</span><h3>План</h3><p>Пропонуємо рішення під вашу ситуацію, не шаблон.</p></div>
+        <div class="step" data-reveal><span class="num">03</span><h3>Впровадження</h3><p>Робимо сайт, CRM чи автоматизацію поетапно.</p></div>
+        <div class="step" data-reveal><span class="num">04</span><h3>Супровід</h3><p>Підтримуємо й донастроюємо після запуску.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container about">
+      <div data-reveal>
+        <p class="eyebrow">Про нас</p>
+        <h2>Локальна експертиза з технічною базою</h2>
+        <p>Ми з Ужгорода і працюємо з малим бізнесом Закарпаття напряму — розуміємо специфіку регіону, а не працюємо за загальним шаблоном "діджитал-агентства".</p>
+        <div class="about-facts">
+          <div class="fact"><span class="n">100%</span><span class="l">рішень під ситуацію клієнта</span></div>
+          <div class="fact"><span class="n">Ужгород</span><span class="l">локальна робота, без посередників</span></div>
+        </div>
+      </div>
+      <div class="chaos-panel" data-reveal style="min-height:220px; display:flex; align-items:center; justify-content:center;">
+        <p style="text-align:center; margin:0;">[ місце для фото команди / офісу ]</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="cta-section" data-reveal>
+        <h2>Готові навести лад у роботі з клієнтами?</h2>
+        <p>Залиште заявку — проведемо безкоштовний швидкий аудит і покажемо, що саме варто змінити першим.</p>
+        <form class="lead-form" id="leadForm">
+          <input type="text" id="leadName" name="name" placeholder="Ваше ім'я" required>
+          <input type="tel" id="leadPhone" name="phone" placeholder="Телефон" required>
+          <textarea id="leadMessage" name="message" placeholder="Коротко про ваш бізнес (необов'язково)"></textarea>
+          <button type="submit" class="btn btn-primary">Залишити заявку</button>
+          <p class="form-status" id="leadStatus" role="status" aria-live="polite"></p>
+        </form>
+        <p class="form-note">Або напишіть напряму: <a href="https://t.me/nova_tsyfra_bot" style="color:inherit; text-decoration:underline;">Telegram</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <a href="#" class="logo"><span class="logo-mark">Н</span>Нова цифра</a>
+    <p>© 2026 Нова цифра · Ужгород</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
