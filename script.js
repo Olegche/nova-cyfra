@@ -3,6 +3,67 @@
   const ENDPOINT_URL = 'https://nova-cyfra.develop-olegch.workers.dev';
   const leadForm = document.getElementById('leadForm');
   const leadStatus = document.getElementById('leadStatus');
+  const COOLDOWN_MS = 60 * 1000; // 60 секунд між відправками з цього браузера
+
+  function getRemainingCooldown() {
+    const last = parseInt(localStorage.getItem('leadFormLastSubmit') || '0', 10);
+    const remaining = COOLDOWN_MS - (Date.now() - last);
+    return remaining > 0 ? remaining : 0;
+  }
+
+  // --- Метадані про відвідувача (пристрій, джерело, перший/повторний візит) ---
+  function detectDevice() {
+    const ua = navigator.userAgent;
+    if (/tablet|ipad/i.test(ua)) return 'Планшет';
+    if (/mobile|android|iphone/i.test(ua)) return 'Мобільний';
+    return 'Десктоп';
+  }
+
+  function detectOS() {
+    const ua = navigator.userAgent;
+    if (/iphone|ipad|ipod/i.test(ua)) return 'iOS';
+    if (/android/i.test(ua)) return 'Android';
+    if (/windows/i.test(ua)) return 'Windows';
+    if (/mac os x/i.test(ua)) return 'macOS';
+    if (/linux/i.test(ua)) return 'Linux';
+    return 'Невідомо';
+  }
+
+  function detectBrowser() {
+    const ua = navigator.userAgent;
+    if (/edg\//i.test(ua)) return 'Edge';
+    if (/opr\//i.test(ua) || /opera/i.test(ua)) return 'Opera';
+    if (/chrome|crios/i.test(ua) && !/edg\//i.test(ua)) return 'Chrome';
+    if (/firefox|fxios/i.test(ua)) return 'Firefox';
+    if (/safari/i.test(ua) && !/chrome|crios|android/i.test(ua)) return 'Safari';
+    return 'Невідомо';
+  }
+
+  function getSource() {
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get('utm_source');
+    if (utmSource) return utmSource;
+    if (!document.referrer) return 'Прямий перехід';
+    try {
+      const refHost = new URL(document.referrer).hostname;
+      if (refHost.includes(window.location.hostname)) return 'Прямий перехід';
+      return refHost;
+    } catch {
+      return 'Прямий перехід';
+    }
+  }
+
+  function isFirstVisit() {
+    const visited = localStorage.getItem('novaTsyfraVisited');
+    if (!visited) {
+      localStorage.setItem('novaTsyfraVisited', '1');
+      return true;
+    }
+    return false;
+  }
+  // Фіксуємо статус візиту одразу при завантаженні сторінки (а не при відправці форми),
+  // щоб коректно визначити "перший раз" незалежно від того, чи заповнить людина форму
+  const visitorIsFirstTime = isFirstVisit();
 
   // --- Валідація полів ---
   const nameInput = document.getElementById('leadName');
@@ -69,6 +130,13 @@
   if (leadForm) {
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      const cooldown = getRemainingCooldown();
+      if (cooldown > 0) {
+        leadStatus.textContent = `Зачекайте ще ${Math.ceil(cooldown / 1000)} сек. перед повторною відправкою.`;
+        return;
+      }
+
       const isNameValid = validateName();
       const isPhoneValid = validatePhone();
       const isMessageValid = validateMessage();
@@ -83,6 +151,11 @@
         name: nameInput.value.trim(),
         phone: normalizePhone(phoneInput.value.trim()),
         message: messageInput.value.trim(),
+        device: detectDevice(),
+        os: detectOS(),
+        browser: detectBrowser(),
+        source: getSource(),
+        firstVisit: visitorIsFirstTime,
       };
       submitBtn.disabled = true;
       leadStatus.textContent = 'Надсилаємо…';
@@ -95,6 +168,7 @@
         const data = await res.json();
         if (data.ok) {
           leadStatus.textContent = 'Дякуємо! Ми зв\'яжемось найближчим часом.';
+          localStorage.setItem('leadFormLastSubmit', Date.now().toString());
           leadForm.reset();
           [nameInput, phoneInput, messageInput].forEach(el => el.classList.remove('valid', 'invalid'));
         } else {
