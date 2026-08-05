@@ -1,16 +1,88 @@
-  // Lead form submission
+// Lead form submission
   // ⚠️ Заміни на реальний URL твого задеплоєного Cloudflare Worker
   const ENDPOINT_URL = 'https://nova-cyfra.develop-olegch.workers.dev';
   const leadForm = document.getElementById('leadForm');
   const leadStatus = document.getElementById('leadStatus');
+
+  // --- Валідація полів ---
+  const nameInput = document.getElementById('leadName');
+  const phoneInput = document.getElementById('leadPhone');
+  const messageInput = document.getElementById('leadMessage');
+  const nameError = document.getElementById('leadNameError');
+  const phoneError = document.getElementById('leadPhoneError');
+  const messageError = document.getElementById('leadMessageError');
+
+  const NAME_RE = /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ'’\- ]{2,60}$/;
+
+  // Нормалізує телефон до формату +380XXXXXXXXX, повертає null якщо невалідний
+  function normalizePhone(raw) {
+    const digits = raw.replace(/[^\d+]/g, '');
+    let d = digits.replace(/\+/g, '');
+    if (d.startsWith('380') && d.length === 12) return '+' + d;
+    if (d.startsWith('0') && d.length === 10) return '+38' + d;
+    if (d.startsWith('80') && d.length === 11) return '+3' + d;
+    return null;
+  }
+
+  function setFieldState(input, errorEl, message) {
+    if (message) {
+      input.classList.add('invalid');
+      input.classList.remove('valid');
+      errorEl.textContent = message;
+      return false;
+    } else {
+      input.classList.remove('invalid');
+      input.classList.add('valid');
+      errorEl.textContent = '';
+      return true;
+    }
+  }
+
+  function validateName() {
+    const v = nameInput.value.trim();
+    if (!v) return setFieldState(nameInput, nameError, "Вкажіть ім'я");
+    if (!NAME_RE.test(v)) return setFieldState(nameInput, nameError, 'Тільки літери, мінімум 2 символи');
+    return setFieldState(nameInput, nameError, '');
+  }
+
+  function validatePhone() {
+    const v = phoneInput.value.trim();
+    if (!v) return setFieldState(phoneInput, phoneError, 'Вкажіть телефон');
+    if (!normalizePhone(v)) return setFieldState(phoneInput, phoneError, 'Формат: +380 XX XXX XX XX або 0XX XXX XX XX');
+    return setFieldState(phoneInput, phoneError, '');
+  }
+
+  function validateMessage() {
+    const v = messageInput.value.trim();
+    if (v.length > 500) return setFieldState(messageInput, messageError, 'Максимум 500 символів');
+    return setFieldState(messageInput, messageError, '');
+  }
+
+  if (nameInput) {
+    nameInput.addEventListener('blur', validateName);
+    nameInput.addEventListener('input', () => { if (nameInput.classList.contains('invalid')) validateName(); });
+    phoneInput.addEventListener('blur', validatePhone);
+    phoneInput.addEventListener('input', () => { if (phoneInput.classList.contains('invalid')) validatePhone(); });
+    messageInput.addEventListener('input', validateMessage);
+  }
+
   if (leadForm) {
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const isNameValid = validateName();
+      const isPhoneValid = validatePhone();
+      const isMessageValid = validateMessage();
+      if (!isNameValid || !isPhoneValid || !isMessageValid) {
+        leadStatus.textContent = 'Перевірте поля, позначені червоним.';
+        (!isNameValid ? nameInput : !isPhoneValid ? phoneInput : messageInput).focus();
+        return;
+      }
+
       const submitBtn = leadForm.querySelector('button[type="submit"]');
       const payload = {
-        name: document.getElementById('leadName').value.trim(),
-        phone: document.getElementById('leadPhone').value.trim(),
-        message: document.getElementById('leadMessage').value.trim(),
+        name: nameInput.value.trim(),
+        phone: normalizePhone(phoneInput.value.trim()),
+        message: messageInput.value.trim(),
       };
       submitBtn.disabled = true;
       leadStatus.textContent = 'Надсилаємо…';
@@ -24,6 +96,7 @@
         if (data.ok) {
           leadStatus.textContent = 'Дякуємо! Ми зв\'яжемось найближчим часом.';
           leadForm.reset();
+          [nameInput, phoneInput, messageInput].forEach(el => el.classList.remove('valid', 'invalid'));
         } else {
           leadStatus.textContent = data.error || 'Щось пішло не так. Спробуйте ще раз.';
         }

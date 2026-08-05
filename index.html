@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body style="background:#F6F8FB;">
 
@@ -40,7 +40,7 @@
     <div class="container hero-grid">
       <div>
         <p class="eyebrow">Цифровий розвиток малого бізнесу</p>
-        <h1>Допомагаємо  бізнесам знайти клієнтів  і перестати їх губити </h1>
+        <h1>Допомагаємо власникам малого бізнесу перестати губити клієнтів через хаос</h1>
         <p class="lead">Іноді достатньо CRM. Іноді потрібен ще й сайт, який реально приводить заявки, автоматизація рутини або AI-асистент. Ми підбираємо рішення під ситуацію, а не продаємо шаблон.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">Отримати безкоштовний аудит</a>
@@ -163,10 +163,19 @@
       <div class="cta-section" data-reveal>
         <h2>Готові навести лад у роботі з клієнтами?</h2>
         <p>Залиште заявку — проведемо безкоштовний швидкий аудит і покажемо, що саме варто змінити першим.</p>
-        <form class="lead-form" id="leadForm">
-          <input type="text" id="leadName" name="name" placeholder="Ваше ім'я" required>
-          <input type="tel" id="leadPhone" name="phone" placeholder="Телефон" required>
-          <textarea id="leadMessage" name="message" placeholder="Коротко про ваш бізнес (необов'язково)"></textarea>
+        <form class="lead-form" id="leadForm" novalidate>
+          <div class="field-group">
+            <input type="text" id="leadName" name="name" placeholder="Ваше ім'я" autocomplete="name" required>
+            <p class="field-error" id="leadNameError"></p>
+          </div>
+          <div class="field-group">
+            <input type="tel" id="leadPhone" name="phone" placeholder="+380 XX XXX XX XX" autocomplete="tel" inputmode="tel" required>
+            <p class="field-error" id="leadPhoneError"></p>
+          </div>
+          <div class="field-group">
+            <textarea id="leadMessage" name="message" placeholder="Коротко про ваш бізнес (необов'язково)" maxlength="500"></textarea>
+            <p class="field-error" id="leadMessageError"></p>
+          </div>
           <button type="submit" class="btn btn-primary">Залишити заявку</button>
           <p class="form-status" id="leadStatus" role="status" aria-live="polite"></p>
         </form>
@@ -183,7 +192,7 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=2"></script>
 
 </body>
 </html>

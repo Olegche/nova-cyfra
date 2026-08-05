@@ -7,6 +7,7 @@
     --primary-dark:#0F2C61;
     --on-primary:#FFFFFF;
     --on-primary-muted:#D9E2F5;
+    --on-primary-danger:#FFB4A8;
     --accent:#FFC93C;
     --card:#FFFFFF;
     --line:#E2E7F0;
@@ -26,6 +27,7 @@
     --primary-dark:#AEC8FF;
     --on-primary:#0B1220;
     --on-primary-muted:#1E2A44;
+    --on-primary-danger:#7A2318;
     --accent:#FFD666;
     --card:#161D2E;
     --line:#28324A;
@@ -222,13 +224,23 @@
   .cta-section .btn-primary{background:var(--accent); color:var(--on-accent);}
   .cta-section .btn-primary:hover{background:#ffd75c;}
   .lead-form{max-width:420px; margin:0 auto; text-align:left;}
+  .lead-form .field-group{margin-bottom:12px;}
   .lead-form input, .lead-form textarea{
-    width:100%; padding:12px 14px; margin-bottom:12px; border-radius:10px;
+    width:100%; padding:12px 14px; border-radius:10px;
     border:1px solid var(--line); font-family:'Inter',sans-serif; font-size:.95rem;
     background:var(--card); color:var(--ink);
   }
+  .lead-form input.invalid, .lead-form textarea.invalid{
+    border-color:var(--danger);
+  }
+  .lead-form input.valid, .lead-form textarea.valid{
+    border-color:var(--success);
+  }
+  .lead-form .field-error{
+    font-size:.78rem; color:var(--on-primary-danger); margin:5px 2px 0; min-height:1em;
+  }
   .lead-form textarea{resize:vertical; min-height:70px;}
-  .lead-form button{width:100%; justify-content:center;}
+  .lead-form button{width:100%; justify-content:center; margin-top:4px;}
   .lead-form .form-note{font-size:.78rem; color:var(--on-primary-muted); margin-top:10px; text-align:center;}
   .lead-form .form-status{font-size:.85rem; margin-top:10px; text-align:center; min-height:1.2em;}
 
